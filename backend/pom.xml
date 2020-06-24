@@ -43,6 +43,7 @@
     </dependencies>
 
     <build>
+        <finalName>todo-app-web</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
