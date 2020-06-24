@@ -1,6 +1,6 @@
 ## Todo Frontend
 
-Build frontend with node 
+Build frontend with node :
 
 `npm install `
 `npm run build `
