@@ -1,8 +1,8 @@
 package de.neuefische.todoapp.service;
 
 import de.neuefische.todoapp.db.ToDoDb;
+import de.neuefische.todoapp.db.ToDoMongoDb;
 import de.neuefische.todoapp.model.ToDo;
-import de.neuefische.todoapp.model.ToDoStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,20 +15,22 @@ import static de.neuefische.todoapp.model.ToDoStatus.OPEN;
 public class ToDoService {
 
     private final ToDoDb toDoDb;
+    private final ToDoMongoDb toDoMongoDb;
 
     @Autowired
-    public ToDoService(ToDoDb toDoDb) {
+    public ToDoService(ToDoDb toDoDb, ToDoMongoDb toDoMongoDb) {
         this.toDoDb = toDoDb;
+        this.toDoMongoDb = toDoMongoDb;
     }
     public ToDo addToDo(ToDo newtodo) {
         String uuid = UUID.randomUUID().toString();
         newtodo.setId(uuid);
         newtodo.setStatus(OPEN);
-        toDoDb.add(newtodo);
+        toDoMongoDb.save(newtodo);
         return newtodo;
     }
     public List<ToDo> getToDoList() {
-        return toDoDb.getToDoList();
+        return (List<ToDo>) toDoMongoDb.findAll();
 
     /*public List<ToDo> getToDoListStatusOpen() {
         return toDoDb.getToDoListStatusOpen();
