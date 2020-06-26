@@ -17,6 +17,7 @@ public class ToDoService {
     private final ToDoDb toDoDb;
     private final ToDoMongoDb toDoMongoDb;
 
+
     @Autowired
     public ToDoService(ToDoDb toDoDb, ToDoMongoDb toDoMongoDb) {
         this.toDoDb = toDoDb;
@@ -48,7 +49,11 @@ public class ToDoService {
         return toDoDb.updateToDoStatus(id,status);
     }
     public List<ToDo> removeToDo(String id){
-        return toDoDb.removeToDo(id);
+        return toDoMongoDb.remove(id);
     }
+//    public void ToDo removeToDo(String id){
+//        ToDo id = toDoMongoDb.findById(id);
+//        toDoMongoDb.delete(id);
+//    }
 
 }
